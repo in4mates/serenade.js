@@ -137,3 +137,14 @@ describe 'Two-way bindings', ->
     model.size = "medium"
     input = @body.querySelector('input')
     expect(input.checked).to.eql(false)
+    
+  it 'triggers bound on controller', ->
+    model = {}
+    input = undefined
+    controller = twoWayBound: (element, attributeName, model) ->
+      model[attributeName] = "Test"
+      input = element
+    @render 'input[type="text" binding:keyup=name]', model, controller
+
+    expect(model.name).to.eql("Test")
+    expect(input).to.eql(@body.querySelector('input')) 

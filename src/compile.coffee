@@ -51,6 +51,8 @@ Property =
         val = "" if val == undefined
         assignUnlessEqual(element, "value", val)
 
+    controller.twoWayBound?(element, ast.value, model)
+
     modelUpdated()
     node.bindEvent(model["#{ast.value}_property"], modelUpdated)
     if ast.name is "binding"
